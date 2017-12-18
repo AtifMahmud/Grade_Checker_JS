@@ -28,10 +28,8 @@ app.get('/scrape', function(res, req){
 
             var $ = cheerio.load(html);
 
-            $('#allSessionsGrades td').each(function(){
-                var grade = $(this).find('.sortarrow').html();
-                grades.push(grade);
-                console.log(grade);
+            $('li').each(function(){
+                console.log($("li").get(0));
             });
         }
 
