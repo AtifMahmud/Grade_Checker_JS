@@ -5,7 +5,7 @@
  */
 
 
-console.log("start");
+onsole.log("Welcome to Grade Checker 0.0.1");
 
 var express = require('express');
 var fs = require('fs');
@@ -16,28 +16,21 @@ var grades = [];
 
 app.get('/scrape', function(res, req){
 
-    console.log("in app.get");
+    console.log("Please wait while we retrieve the information");
+
     var url = 'https://ssc.adm.ubc.ca/sscportal/servlets/SRVSSCFramework?function=SessGradeRpt';
     request(url, function(error, response, html){
 
         console.log("in request");
 
         if(!error){
-            
-            console.log("in !error");
-
             var $ = cheerio.load(html);
-
-            $('li').each(function(){
-                console.log($("li").get(0));
-            });
+            console.log($('table').html());
+        } else {
+            console.log("Sorry, we encountered an error. Please try again.")
         }
 
-
-
     });
-
-
 });
 
 app.listen('8081');
