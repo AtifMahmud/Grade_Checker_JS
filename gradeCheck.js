@@ -5,7 +5,7 @@
  */
 
 
-onsole.log("Welcome to Grade Checker 0.0.1");
+console.log("Welcome to Grade Checker 0.0.1");
 
 var express = require('express');
 var fs = require('fs');
@@ -18,14 +18,13 @@ app.get('/scrape', function(res, req){
 
     console.log("Please wait while we retrieve the information");
 
-    var url = 'https://ssc.adm.ubc.ca/sscportal/servlets/SRVSSCFramework?function=SessGradeRpt';
+    var url = 'https://cas.id.ubc.ca/ubc-cas/login?TARGET=https%3A%2F%2Fssc.adm.ubc.ca%2Fsscportal%2Fservlets%2FSRVSSCFramework';
     request(url, function(error, response, html){
-
-        console.log("in request");
 
         if(!error){
             var $ = cheerio.load(html);
-            console.log($('table').html());
+                var tree = $;
+                console.log(tree('h1').html());
         } else {
             console.log("Sorry, we encountered an error. Please try again.")
         }
