@@ -4,33 +4,22 @@
  * Date: 17th December, 2017
  */
 
+var url = "https://ssc.adm.ubc.ca/sscportal/servlets/SRVAcademicRecord?context=html";
+var username = "johndoe"
+var password = "I<3UBC";
 
-console.log("Welcome to Grade Checker 0.0.1");
+var casper = require('casper').create();
+var x = require('casper').selectXpath;
 
-var express = require('express');
-var fs = require('fs');
-var request = require('request');
-var cheerio = require('cheerio');
-var app = express();
-var grades = [];
+casper.userAgent('Chrome/37.0.2062.120');
+casper.start(url);
 
-app.get('/scrape', function(res, req){
-
-    console.log("Please wait while we retrieve the information");
-
-    var url = 'https://cas.id.ubc.ca/ubc-cas/login?TARGET=https%3A%2F%2Fssc.adm.ubc.ca%2Fsscportal%2Fservlets%2FSRVSSCFramework';
-    request(url, function(error, response, html){
-
-        if(!error){
-            var $ = cheerio.load(html);
-                var tree = $;
-                console.log(tree('h1').html());
-        } else {
-            console.log("Sorry, we encountered an error. Please try again.")
-        }
-
-    });
+casper.then(function(){
+    this.sendKeys('#username', username);
+    this.sendKeys('#password', password);
+    casper.capture('screen1.png');
+    console.log('Username and password inserted');
 });
 
-app.listen('8081');
-exports = module.exports = app;
+casper.run();
+
