@@ -5,11 +5,11 @@
  */
 
 var url = "https://ssc.adm.ubc.ca/sscportal/servlets/SRVAcademicRecord?context=html";
-var username = "johndoe"
-var password = "I<3UBC";
+var username = 'johnDoe';
+var password = 'I<3UBC';
 
 var casper = require('casper').create();
-var x = require('casper').selectXpath;
+var x = require('casper').selectXPath;
 
 casper.userAgent('Chrome/37.0.2062.120');
 casper.start(url);
@@ -17,8 +17,13 @@ casper.start(url);
 casper.then(function(){
     this.sendKeys('#username', username);
     this.sendKeys('#password', password);
-    casper.capture('screen1.png');
+    casper.capture('screen2.png');
     console.log('Username and password inserted');
+});
+
+casper.thenClick(x('//*[@id="login"]/input[6]'), function (){
+    casper.capture('screen2.png');
+    console.log('Clicked Button');
 });
 
 casper.run();
