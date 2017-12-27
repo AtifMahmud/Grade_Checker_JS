@@ -5,8 +5,8 @@
  */
 
 var url = "https://ssc.adm.ubc.ca/sscportal/servlets/SRVAcademicRecord?context=html";
-var username = 'johnDoes';
-var password = 'ihunbau';
+var username = '';
+var password = 'H';
 
 var casper = require('casper').create();
 var x = require('casper').selectXPath;
@@ -27,11 +27,21 @@ casper.thenClick(x('//*[@id="login"]/input[6]'), function (){
 });
 
 casper.then(function(){
-
     var gradeTable = this.getHTML('table#allSessionsGrades', true);
-    
+
     if(!fs.exists('gradeTable.html')){
+
         fs.write('gradeTable.html', gradeTable, 'w');
+
+    } else {
+        
+        var savedTable = fs.read('gradeTable.html');
+
+        if (gradeTable != savedTable){
+            console.log("Changed!");            
+        } else {
+            console.log("No Change!");
+        }
     }
 
 });

@@ -10,4 +10,8 @@
 		"cheerio"   : "latest",
 		"jquery"  	: "latest"
 	}
+
+	"engines": {
+    "node": "6.9.4"    // You can use any version
+  }
 }
